@@ -26,6 +26,7 @@ public class TestController {
     @GetMapping("/check")
     public String check(String signature, String timestamp, String nonce, String echostr) {
         if (iService.checkSignature(signature, timestamp, nonce, echostr)) {
+            log.info("checkSignature ok");
             return echostr;
         }
         return null;

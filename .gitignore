@@ -1,5 +1,16 @@
+target
+*.log
+.project
+.settings
+.classpath
 .idea/
+*.iml
 .gradle/
+gradle/
+gradlew
+gradlew.bat
 build
 out
-*.iml
+.mvn/
+mvnw
+mvnw.cmd

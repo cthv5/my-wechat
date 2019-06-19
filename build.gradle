@@ -13,7 +13,7 @@ repositories {
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
-
+apply plugin: 'war'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,6 +22,8 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    // 设置内嵌tomcat
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     //wxchat
     compile("com.soecode.wx-tools:wx-tools:2.1.4-RELEASE")
 }
