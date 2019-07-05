@@ -3,7 +3,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.21.RELEASE")
+        classpath("com.bmuschko:gradle-cargo-plugin:2.3")
     }
 }
 
@@ -14,16 +15,34 @@ repositories {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
+apply plugin: 'com.bmuschko.cargo'
+
+cargo {
+    containerId = 'tomcat9x'
+    port = 8085
+
+    deployable  {
+        context = 'testWechat'
+    }
+    remote {
+        hostname = ''
+        username = 'admin'
+        password = 'admin123'
+    }
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
 dependencies {
+    cargo "org.codehaus.cargo:cargo-core-uberjar:1.5.1",
+            "org.codehaus.cargo:cargo-ant:1.5.1"
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     // 设置内嵌tomcat
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     //wxchat
-    compile("com.soecode.wx-tools:wx-tools:2.1.4-RELEASE")
+    compile("com.soecode.wx-tools:wx-tools:2.1.4-RELEASE") {
+        exclude module: 'httpclient'
+    }
 }
